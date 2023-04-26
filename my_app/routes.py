@@ -42,6 +42,8 @@ def nuevo_producto(product_id):
                 db.session.add(categoria)
                 db.session.commit()
             
+            print(f'este es el producto id {product_id}')
+
             # Crea un nuevo Barcode y lo asocia al producto
             barcode = Barcode(ean=product_id)
             

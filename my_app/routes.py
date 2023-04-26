@@ -33,39 +33,28 @@ def nuevo_producto(product_id):
     form = ProductForm()
 
     print(f'este es la id en la ruta de producto: {product_id}')
-    if request.method == 'GET':
-        
-        if product_id is not None:   
-            
-            if form.validate_on_submit():
-                # Busca la categoría por nombre, si no existe la crea
-                categoria = Categoria.query.filter_by(nombre=form.categoria_nombre.data).first()
-                if not categoria:
-                    categoria = Categoria(nombre=form.categoria_nombre.data)
-                    db.session.add(categoria)
-                    db.session.commit()
-                
-                print(f'este es el producto id {product_id}')
 
-                # Crea un nuevo Barcode y lo asocia al producto
-                barcode = Barcode(ean=product_id)
-                
-                # Crea un nuevo Producto y lo asocia a la categoría y al barcode
-                producto = Product(
-                    brand=form.brand.data,
-                    description=form.description.data,
-                    size=form.size.data,
-                    price=form.price.data,
-                    categoria=categoria,
-                    ean=product_id
-                )
-                
-                # Agrega el nuevo producto y barcode a la base de datos
-                db.session.add(producto)
-                db.session.commit()
-                
-                flash('El producto ha sido creado exitosamente!', 'success')
-                return redirect(url_for('index'))
-        else:
-            redirect(url_for('index'))
+    if form.validate_on_submit():
+        # Crea un nuevo Producto y lo asocia a la categoría y al barcode
+        producto = Product(
+        brand=form.brand.data,
+        description=form.description.data,
+        size=form.size.data,
+        price=form.price.data,
+        categoria=form.categoria_nombre.data,
+        ean=product_id
+        )
+        # Agrega el nuevo producto y barcode a la base de datos
+        db.session.add(producto)
+        db.session.commit()
+        
+        flash('El producto ha sido creado exitosamente!', 'success')
+        
+    elif request.method == 'GET':
+        print(f'este es el producto id {product_id}')
+    
+        form.ean.data = product_id
+        
+        
+        
     return render_template('nuevo_producto.html', form=form, product_id=product_id)

@@ -1,8 +1,5 @@
 from sqlalchemy import Numeric
-from wtforms import StringField, SubmitField, BooleanField, PasswordField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
 from flask_sqlalchemy import SQLAlchemy
-
 from my_app import app, db
 
 

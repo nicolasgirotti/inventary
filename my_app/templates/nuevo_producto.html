@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <h1>Nuevo Producto</h1>
+  <form method="POST" action="{{ url_for('nuevo_producto') }}">
+    {{ form.csrf_token }}
+    <div class="form-group">
+      {{ form.brand.label }}
+      {{ form.brand(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.description.label }}
+      {{ form.description(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.size.label }}
+      {{ form.size(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.price.label }}
+      {{ form.price(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.categoria_nombre.label }}
+      {{ form.categoria_nombre(class="form-control") }}
+    </div>
+    
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const product_id = params.get('product_id');
+    if (product_id) {
+      document.querySelector('[name="ean"]').value = product_id;
+    }
+  </script>
+{% endblock content %}

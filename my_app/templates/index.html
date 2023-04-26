@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+
+{% block content %}
     
-         {% if product_id == '' %}
-            <a href="https://qrbot.net/x-callback-url/scan?x-success=https%3A%2F%2Finventario-f0hw.onrender.com/">
-                <h1>Lector de barra</h1>
-            </a>
-         {% else %}
-            <h1>Número del producto: {{ product_id }}</h1>
-         {% endif %}
-</body>
-</html>
+    {% if product_id == '' %}
+        <a href="https://qrbot.net/x-callback-url/scan?x-success=https%3A%2F%2Finventario-f0hw.onrender.com/">
+            <h1>Lector de barra</h1>
+        </a>
+    {% else %}
+        <h1>Número del producto: {{ product_id }}</h1>
+    {% endif %}
+
+{% endblock content %}
+         

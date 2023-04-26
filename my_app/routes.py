@@ -62,9 +62,12 @@ def nuevo_producto(product_id):
         flash('El producto ha sido creado exitosamente!', 'success')
         
     elif request.method == 'GET':
-        print(f'este es el producto id {product_id}')
+        print(f'este es el producto id de la operacion get{product_id}')
     
         form.ean.data = product_id
+
+        print(f'este es el form{ form.ean.data}')
+        
         
         
         

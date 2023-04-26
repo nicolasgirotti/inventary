@@ -32,6 +32,8 @@ def index():
 def nuevo_producto(product_id):
     form = ProductForm()
 
+    print(f'este es la id en la ruta de producto: {product_id}')
+
     if product_id is not None:   
         
         if form.validate_on_submit():

@@ -67,4 +67,4 @@ def nuevo_producto(product_id):
             return redirect(url_for('index'))
     else:
         redirect(url_for('index'))
-    return render_template('nuevo_producto.html', form=form)
+    return render_template('nuevo_producto.html', form=form, product_id=product_id)

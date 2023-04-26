@@ -35,15 +35,26 @@ def nuevo_producto(product_id):
     print(f'este es la id en la ruta de producto: {product_id}')
 
     if form.validate_on_submit():
+
+        categoria = Categoria.query.filter_by(nombre=form.categoria_nombre.data).first()
+        if not categoria:
+            categoria = Categoria(nombre=form.categoria_nombre.data)
+            db.session.add(categoria)
+            db.session.commit()
+        
+        # Crea un nuevo Barcode y lo asocia al producto
+        barcode = Barcode(ean=form.ean.data)
+        
         # Crea un nuevo Producto y lo asocia a la categoría y al barcode
         producto = Product(
-        brand=form.brand.data,
-        description=form.description.data,
-        size=form.size.data,
-        price=form.price.data,
-        categoria=form.categoria_nombre.data,
-        ean=product_id
+            brand=form.brand.data,
+            description=form.description.data,
+            size=form.size.data,
+            price=form.price.data,
+            categoria=categoria,
+            bar_code=barcode
         )
+
         # Agrega el nuevo producto y barcode a la base de datos
         db.session.add(producto)
         db.session.commit()

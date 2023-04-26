@@ -33,6 +33,15 @@ def nuevo_producto(product_id):
     form = ProductForm()
 
     print(f'este es la id en la ruta de producto: {product_id}')
+    if request.method == 'GET':
+        producto = Product(
+                brand=form.brand.data,
+                description=form.description.data,
+                size=form.size.data,
+                price=form.price.data,
+                categoria=categoria,
+                ean=product_id
+            )
 
     if product_id is not None:   
         
